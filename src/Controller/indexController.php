@@ -1,5 +1,5 @@
 <?php
-// src/Controller/LuckyController.php
+// src/Controller.php
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +14,6 @@ class indexController extends AbstractController
 #[Route('/', name: 'home')]
 public function index(){
 
-var_dump("salut");die;
+return $this->render('index.html.twig');
 }
 }
