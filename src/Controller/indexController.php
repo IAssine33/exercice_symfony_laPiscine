@@ -6,10 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\Routing\Attribute\Route;
 
-// pour la class et extends je ne vois pas exactement ce qu'ils font
+// la classe "indexController" est l'enfant de l'extends "AbstractController(parent)",
+// qui permet de prendre toute les methodes dans l'extends et les utiliser dans la class (enfant).
 class indexController extends AbstractController
 {
-    //permet donner un nom a la place de mon URL
+    //permet donner un nom d'URL qui est "/"
 #[Route('/', name: 'home')]
 public function index(){
 
