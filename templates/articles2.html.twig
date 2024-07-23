@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <main>
+        <article class="blocArticle">
+
+            {% for categorie in categories %}
+
+                    <section>
+                        <h2 class="titre_jaune" >POKÉMON :</h2>
+                        <p> {{ categorie }}</p>
+                    </section>
+
+            {% endfor %}
+
+        </article>
+    </main>
+{% endblock %}
