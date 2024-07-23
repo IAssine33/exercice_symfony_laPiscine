@@ -6,11 +6,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
-class articlesController extends AbstractController
+class pokemonesController extends AbstractController
 {
-    //permet donner un nom d'URL qui est "/articles"
-    #[Route('/articles', name: 'list_articles')]
-    public function listArticles(){
+    //permet donner un nom d'URL qui est "/pokémones"
+    #[Route('/pokémones', name: 'list_pokemones')]
+    public function listPokemones(){
 
         $pokemons = [
             [
@@ -76,17 +76,17 @@ class articlesController extends AbstractController
 
         ];
                                                          // donner une valeur a la variable
-        return $this->render('articles.html.twig', ['pokemons' => $pokemons]);
+        return $this->render('pokemones.html.twig', ['pokemons' => $pokemons]);
     }
 
-    #[Route('/articles2', name: 'list_articles2')]
-    public function articles2(){
+    #[Route('/categories_pokemones', name: 'list_categories_pokemones')]
+    public function categories_pokemones(){
         $categories = [
             'Red', 'Green', 'Blue', 'Yellow', 'Gold', 'Silver', 'Crystal'
         ];
 
-       /// return $this->render('articles.html.twig', ['categories' => $categories]);
-        $html = $this->renderView('articles2.html.twig', [
+       /// return $this->render('pokemones.html.twig', ['categories' => $categories]);
+        $html = $this->renderView('categories_pokemones.html.twig', [
             'categories' => $categories
         ]);
 
