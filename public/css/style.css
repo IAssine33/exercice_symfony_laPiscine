@@ -87,7 +87,7 @@ main{
 .blocArticle{
     overflow: hidden;
 }
-.blocArticle:before{
+.blocArticle:after{
     animation: glissement 3s forwards;
     animation-delay:1s;
 }

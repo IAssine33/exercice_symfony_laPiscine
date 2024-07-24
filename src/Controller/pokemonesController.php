@@ -116,12 +116,8 @@ class pokemonesController extends AbstractController
 
     }
 
-    #[Route('/pokemonById', name: 'pokemon_by_id')]
-    public function pokemon_by_id(Request $request):Response{
-
-
-        //$request = Request::createFromGlobals();
-        $idPokemon = $request->query->get("id");
+    #[Route('/pokemonById/{idPokemon}', name: 'pokemon_by_id')]
+    public function pokemon_by_id($idPokemon){
 
 
         $pokemonFound = null;
