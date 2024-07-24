@@ -9,9 +9,9 @@
                 {% if pokemon.isPublished %}
                     <section>
                         <h2 class="titre_jaune" >POKÉMON :</h2>
-                        <p> {{ pokemon.title }}</p>
+                        <h2><a href="{{ path("pokemon_by_id") }}?id={{ pokemon.id }}">{{ pokemon.title }} </a></h2>
                         <p>{{ pokemon.content }}</p>
-                        <div class="image_pokemon"><img src="{{ pokemon.image }}" alt="{{ pokemon.title }}"></div>
+                        <div class="image_pokemon"><a href="{{ path("pokemon_by_id") }}?id={{ pokemon.id }}"><img src="{{ pokemon.image }}" alt="{{ pokemon.title }}"></a></div>
 
                     </section>
                 {% endif %}

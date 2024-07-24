@@ -9,11 +9,16 @@ body{
     background-color:bisque;
 }
 
-nav ul li a{
+ a{
     font-family: 'Pokemon Solid', sans-serif;
     text-decoration: none;
     color: white;
+
 }
+ a:hover{
+     color: red;
+
+ }
 
 header {
 
@@ -79,10 +84,35 @@ main{
     text-align: center;
     height: 200px;
 }
+.blocArticle{
+    overflow: hidden;
+}
+.blocArticle:before{
+    animation: glissement 3s forwards;
+    animation-delay:1s;
+}
+    @keyframes glissement{
+        from {
+            margin-left: 100%;
+            width: 300%;
+        }
+
+        to {
+            margin-left: 0%;
+            width: 100%;
+        }
+    }
+
+
 .image_pokemon{
     width: 40%;
-    transform: rotateY(3.142rad);
+
 }
+.image_pokemon:hover{
+    width: 45%;
+}
+
+
 img{
     width: 100%;
 
