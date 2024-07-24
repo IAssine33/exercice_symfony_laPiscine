@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %} acceuil {% endblock %}
+
+{% block main %}
+    <main>
+        <article>
+            <section>
+                <h2 class="titre_jaune" >POKÉMON :</h2>
+                <form method="get">
+                    <label for="name">Nom :</label>
+                    <input type="text" name="name">
+                    <label for="lname">Prénom :</label>
+                    <input type="text" name="prenom">
+                    <label for="age">Age :</label>
+                    <input type="number" name="age">
+                    <input type="submit">
+
+                </form>
+            </section>
+        </article>
+    </main>
+{% endblock %}

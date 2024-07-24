@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block title %} Choix du pokémons {% endblock %}
+{% block main %}
+    <main>
+        <article class="blocArticle">
+                    <section>
+                        <h2 class="titre_jaune" >POKÉMON CHOISIS:</h2>
+                        <p> {{ pokemon.id }}</p>
+                        <h2> {{ pokemon.title }} </h2>
+                        <div class="image_pokemon"><img src="{{ pokemon.image }}" alt="{{ pokemon.title }}"></div>
+
+                    </section>
+
+        </article>
+    </main>
+{% endblock %}

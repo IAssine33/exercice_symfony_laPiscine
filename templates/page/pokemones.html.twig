@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
-
+{% block title %} pokémons {% endblock %}
 {% block main %}
     <main>
         <article class="blocArticle">
@@ -8,9 +8,11 @@
 
                 {% if pokemon.isPublished %}
                     <section>
-                <h2 class="titre_jaune" >POKÉMON :</h2>
-                <p> {{ pokemon.title }}</p>
-                <p>{{ pokemon.content }}</p>
+                        <h2 class="titre_jaune" >POKÉMON :</h2>
+                        <p> {{ pokemon.title }}</p>
+                        <p>{{ pokemon.content }}</p>
+                        <div class="image_pokemon"><img src="{{ pokemon.image }}" alt="{{ pokemon.title }}"></div>
+
                     </section>
                 {% endif %}
 
