@@ -3,8 +3,9 @@
 declare(strict_types=1);
 namespace App\Controller;
 
+use App\Repository\PokemonRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -128,6 +129,20 @@ class pokemonesController extends AbstractController
             }
         }
         return $this->render('page/pokemons_choice.html.twig', ['pokemon' => $pokemonFound]);
+    }
+
+    #[Route('/list_pokemon_bdd', name: 'list-pokemon-bdd')]
+    //                              param1(instancier) (dans) param2(variable)
+    public function listPokemonBdd(PokemonRepository $pokemonRepository){
+
+        return $this->render('page/list_pokemon_bdd.html.twig', ['pokemons' => $pokemonRepository->findAll()]);
+    }
+
+    #[Route('/pokemonById_bdd/{idPokemon}', name: 'pokemon_by_id_bdd')]
+
+    public function pokemon_by_id_bdd($idPokemon, PokemonRepository $pokemonRepository){
+
+        return $this -> render('page/pokemons_choiceBdd.html.twig', ['pokemon' => $pokemonRepository->find($idPokemon)]);
     }
 }
 

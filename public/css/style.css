@@ -41,7 +41,7 @@ header {
 
 
 main{
-    height: 90vh;
+    height: 150vh;
 }
 
 .nav_bar{
@@ -82,12 +82,11 @@ main{
     padding: 50px;
     margin-bottom: 50px;
     text-align: center;
-    height: 200px;
+    height: auto;
 }
+
+
 .blocArticle{
-    overflow: hidden;
-}
-.blocArticle:after{
     animation: glissement 3s forwards;
     animation-delay:1s;
 }
