@@ -24,7 +24,7 @@ class PokemonRepository extends ServiceEntityRepository
         // Construit la requête pour sélectionner les entités Pokémon
         $query = $queryBuilder->select('pokemon')
             ->where('pokemon.title LIKE :search') // Ajoute une condition pour le titre.
-            ->setParameter('search', '%'.$search.'%') // Définit le paramètre de recherche avec des jokers.
+            ->setParameter('search', '%'.$search.'%') // Définit le paramètre de recherche avec des chiffres ou caractéres n'importe où au '%.milieu.%' .
             ->getQuery(); // Obtient l'objet requête
         // Exécute la requête et obtient les résultats sous forme de tableau
         $pokemons = $query->getArrayResult();
