@@ -149,14 +149,16 @@ class pokemonesController extends AbstractController
     #[Route('/search_pokemon_bdd', name: 'search_pokemon_bdd')]
     public function search_pokemon_bdd(Request $request, PokemonRepository $pokemonRepository)
     {
-        $pokemonFound = null;
+
+        $pokemonsFound = [];
 
         if ($request->request->has('title')) {
 
             $titleSearched = $request->request->get('title');
-            $pokemonFound = $pokemonRepository->findOneBy(['title' => $titleSearched]);
 
-            if (!$pokemonFound) {
+            $pokemonsFound = $pokemonRepository->findLikeTitle($titleSearched);
+
+            if (count($pokemonsFound) === 0) {
                 $html = $this->renderView('page/404.html.twig');
                 return new Response($html, 404);
             }
@@ -164,7 +166,7 @@ class pokemonesController extends AbstractController
         }
 
 
-        return $this->render('page/pokemon_searched.html.twig', ['pokemon' => $pokemonFound]);
+        return $this->render('page/pokemon_searched.html.twig', ['pokemons' => $pokemonsFound]);
 
 
     }
