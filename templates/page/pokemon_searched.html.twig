@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Choisis ton pokémone {% endblock %}
+
+{% block main %}
+    <main>
+        {% if pokemon %}
+        <article class="blocArticle">
+            <section>
+                <h2 class="titre_jaune" >POKÉMON :</h2>
+                <h2 class="blue"> {{ pokemon.title }} </h2>
+                <p> {{ pokemon.description }} </p>
+                <div class="image_pokemon"><img src="{{ pokemon.image }}" alt="{{ pokemon.title }}"></div>
+            </section>
+        </article>
+        {% endif %}
+        <article>
+                <section>
+                   <h2> Choisis ton pokémone </h2>
+                    <form method="post">
+                        <label for="title">Nom :</label>
+                        <input type="text" name="title">
+                        <input type="submit">
+                    </form>
+                </section>
+        </article>
+    </main>
+{% endblock %}

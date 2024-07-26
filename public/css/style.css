@@ -9,6 +9,10 @@ body{
     background-color:bisque;
 }
 
+.blue{
+   color:  rgba(40, 107, 255, 1)
+}
+
  a{
     font-family: 'Pokemon Solid', sans-serif;
     text-decoration: none;
@@ -88,7 +92,6 @@ main{
 
 .blocArticle{
     animation: glissement 3s forwards;
-    animation-delay:1s;
 }
     @keyframes glissement{
         from {

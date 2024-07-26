@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Repository\PokemonRepository;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -132,7 +133,7 @@ class pokemonesController extends AbstractController
     }
 
     #[Route('/list_pokemon_bdd', name: 'list-pokemon-bdd')]
-    //                              param1(instancier) (dans) param2(variable)
+    //            "autowiere" -> param1(instancier) (dans) param2(variable)
     public function listPokemonBdd(PokemonRepository $pokemonRepository){
 
         return $this->render('page/list_pokemon_bdd.html.twig', ['pokemons' => $pokemonRepository->findAll()]);
@@ -143,6 +144,29 @@ class pokemonesController extends AbstractController
     public function pokemon_by_id_bdd($idPokemon, PokemonRepository $pokemonRepository){
 
         return $this -> render('page/pokemons_choiceBdd.html.twig', ['pokemon' => $pokemonRepository->find($idPokemon)]);
+    }
+
+    #[Route('/search_pokemon_bdd', name: 'search_pokemon_bdd')]
+    public function search_pokemon_bdd(Request $request, PokemonRepository $pokemonRepository)
+    {
+        $pokemonFound = null;
+
+        if ($request->request->has('title')) {
+
+            $titleSearched = $request->request->get('title');
+            $pokemonFound = $pokemonRepository->findOneBy(['title' => $titleSearched]);
+
+            if (!$pokemonFound) {
+                $html = $this->renderView('page/404.html.twig');
+                return new Response($html, 404);
+            }
+
+        }
+
+
+        return $this->render('page/pokemon_searched.html.twig', ['pokemon' => $pokemonFound]);
+
+
     }
 }
 
