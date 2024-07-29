@@ -78,6 +78,11 @@ header {
 
 }
 
+.onePokemon{
+    height: 71vh;
+}
+
+
 .blocArticle section{
     font-family: 'Pokemon Solid', sans-serif;
     background-color: rgba(80, 111, 144, 3);
@@ -92,7 +97,7 @@ header {
 
 
 .blocArticle{
-    animation: glissement 3s forwards;
+    animation: glissement 1s forwards;
 }
     @keyframes glissement{
         from {

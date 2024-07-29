@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Pokemon;
+use App\Form\PokemonType;
 use App\Repository\PokemonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -203,38 +204,58 @@ class pokemonesController extends AbstractController
 
             $pokemon = null;
 
-            if($request -> getMethod() === 'POST'){
+            if ($request->getMethod() === 'POST') {
 
-                $title = $request -> request -> get('title');
-                $description = $request -> request -> get('description');
-                $type = $request -> request -> get('type');
-                $image = $request -> request -> get('image');
+                $title = $request->request->get('title');
+                $description = $request->request->get('description');
+                $type = $request->request->get('type');
+                $image = $request->request->get('image');
 
                 $pokemon = new Pokemon();
 
-                $pokemon -> setTitle($title);
-                $pokemon -> setDescription($description);
-                $pokemon -> setType($type);
-                $pokemon -> setImage($image);
+                $pokemon->setTitle($title);
+                $pokemon->setDescription($description);
+                $pokemon->setType($type);
+                $pokemon->setImage($image);
                 $entityManager->persist($pokemon);
                 $entityManager->flush();
+
+
             }
 
+            return $this->render('page/pokemon_insert_without_form.html.twig', ['pokemon' => $pokemon]);
 
-
-
-        // Autre methode sans créer de constructeur.
-            //$pokemon = new Pokemon();
-            //$pokemon->setType('Voleur');
-            //$pokemon->setTitle('Roucoups');
-            //$pokemon->setDescription('Roucoups est l évolution de Roucool au niveau 18, et il évolue en Roucarnage à partir du niveau 36');
-            //$pokemon->setImage('https://www.pokepedia.fr/images/thumb/d/dc/Roucoups-RFVF.png/1200px-Roucoups-RFVF.png');
-
-
-        return $this->render('page/pokemon_insert_without_form.html.twig', ['pokemon' => $pokemon]);
         }
+            #[Route('/pokemon/insert/form-builder', name: 'insert_formBuilder_pokemon_bdd')]
+        public function insertFormBuilderPokemon(EntityManagerInterface $entityManager, Request $request): Response
+        {
+            // on a créé une classe de "gabarit de formulaire HTML" avec php bin/console make:form
 
+            // je créé une instance de la classe d'entité Pokemon
+           $pokemon = new Pokemon();
+
+            // permet de générer une instance de la classe de gabarit de formulaire et de la lier avec l'instance de l'entité
+           $pokemonForm = $this->createForm(PokemonType::class, $pokemon);
+
+            // lie le formulaire avec la requête
+           $pokemonForm->handleRequest($request);
+
+            // si le formulaire a été envoyé et que ces données sont correctes
+           if ($pokemonForm->isSubmitted() && $pokemonForm->isValid()) {
+               $entityManager->persist($pokemon);
+               $entityManager->flush();
+
+           }
+           return $this->render('page/pokemon_insert_formBuilder.html.twig', [ 'pokemonForm' => $pokemonForm->createView()]);
+        }
 }
+
+
+
+
+
+
+
 
 
 
