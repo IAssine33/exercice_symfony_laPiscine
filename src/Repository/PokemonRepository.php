@@ -27,7 +27,7 @@ class PokemonRepository extends ServiceEntityRepository
             ->setParameter('search', '%'.$search.'%') // Définit le paramètre de recherche avec des chiffres ou caractéres n'importe où au '%.milieu.%' .
             ->getQuery(); // Obtient l'objet requête
         // Exécute la requête et obtient les résultats sous forme de tableau
-        $pokemons = $query->getArrayResult();
+        $pokemons = $query->getResult();
 
         // Retourne les résultats
         return $pokemons;

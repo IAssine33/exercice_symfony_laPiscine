@@ -44,8 +44,9 @@ header {
 }
 
 
-main{
-    height: 150vh;
+
+.e404{
+    width: 50%;
 }
 
 .nav_bar{

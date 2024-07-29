@@ -30,6 +30,8 @@ class Pokemon
         return $this->id;
     }
 
+
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -77,4 +79,6 @@ class Pokemon
 
         return $this;
     }
+
+
 }

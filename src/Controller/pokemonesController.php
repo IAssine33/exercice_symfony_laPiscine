@@ -3,8 +3,9 @@
 declare(strict_types=1);
 namespace App\Controller;
 
+use App\Entity\Pokemon;
 use App\Repository\PokemonRepository;
-
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
@@ -167,9 +168,72 @@ class pokemonesController extends AbstractController
 
 
         return $this->render('page/pokemon_searched.html.twig', ['pokemons' => $pokemonsFound]);
-
-
     }
+
+    #[route('/pokemon/delete/{id}', name: 'delete_pokemon')]
+    public function deletePokemon(int $id, PokemonRepository $pokemonRepository, EntityManagerInterface $entityManager): Response
+    {
+
+
+
+       $pokemon = $pokemonRepository->find($id);
+
+        if (!$pokemon) {
+
+            $html = $this->renderView('page/404.html.twig');
+            return new Response($html, 404);
+
+        }
+
+       $entityManager->remove($pokemon);
+
+       $entityManager->flush();
+
+
+       return $this->redirectToRoute('list-pokemon-bdd');
+
+
+
+        }
+
+
+        #[Route('/list_insert_pokemon_bdd', name: 'insert_pokemon_bdd')]
+        public function insertPokemon(EntityManagerInterface $entityManager, Request $request): Response
+        {
+
+            $pokemon = null;
+
+            if($request -> getMethod() === 'POST'){
+
+                $title = $request -> request -> get('title');
+                $description = $request -> request -> get('description');
+                $type = $request -> request -> get('type');
+                $image = $request -> request -> get('image');
+
+                $pokemon = new Pokemon();
+
+                $pokemon -> setTitle($title);
+                $pokemon -> setDescription($description);
+                $pokemon -> setType($type);
+                $pokemon -> setImage($image);
+                $entityManager->persist($pokemon);
+                $entityManager->flush();
+            }
+
+
+
+
+        // Autre methode sans créer de constructeur.
+            //$pokemon = new Pokemon();
+            //$pokemon->setType('Voleur');
+            //$pokemon->setTitle('Roucoups');
+            //$pokemon->setDescription('Roucoups est l évolution de Roucool au niveau 18, et il évolue en Roucarnage à partir du niveau 36');
+            //$pokemon->setImage('https://www.pokepedia.fr/images/thumb/d/dc/Roucoups-RFVF.png/1200px-Roucoups-RFVF.png');
+
+
+        return $this->render('page/pokemon_insert_without_form.html.twig', ['pokemon' => $pokemon]);
+        }
+
 }
 
 
