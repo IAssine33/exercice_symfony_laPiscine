@@ -83,6 +83,13 @@ header {
 }
 
 
+.img_logoUpd{
+    width: 500px;
+    margin: -150px 32%;
+
+}
+
+
 .blocArticle section{
     font-family: 'Pokemon Solid', sans-serif;
     background-color: rgba(80, 111, 144, 3);

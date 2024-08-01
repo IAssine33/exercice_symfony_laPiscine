@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PokemonRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PokemonRepository::class)]
 class Pokemon
@@ -14,6 +15,7 @@ class Pokemon
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -24,6 +26,13 @@ class Pokemon
 
     #[ORM\Column(length: 255)]
     private ?string $type = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Regex("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/")]
+    private ?string $password = null;
+
+    #[ORM\ManyToOne(inversedBy: 'pokemons')]
+    private ?Generation $generation = null;
 
     public function getId(): ?int
     {
@@ -76,6 +85,30 @@ class Pokemon
     public function setType(string $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getGeneration(): ?Generation
+    {
+        return $this->generation;
+    }
+
+    public function setGeneration(?Generation $generation): static
+    {
+        $this->generation = $generation;
 
         return $this;
     }

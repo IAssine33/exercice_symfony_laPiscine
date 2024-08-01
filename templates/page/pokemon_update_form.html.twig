@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+    Pokemon : form update
+{% endblock %}
+
+{% block main %}
+
+<div class="img_logoUpd">
+    <a href="{{ path("home") }}"><img src="https://jolstatic.fr/www/captures/1951/6/58356.png" alt=""></a>
+</div>
+<article class="blocArticle" >
+    <section>
+        <div class="col-12">
+            {{ form_start(pokemonUpdateForm) }}
+
+                {{ form_row(pokemonUpdateForm.title) }}
+                {{ form_row(pokemonUpdateForm.description) }}
+                {{ form_row(pokemonUpdateForm.password) }}
+
+            {{ form_end(pokemonUpdateForm) }}
+
+        {# créer toute les imputs automatiquement a partire de la BDD #}
+        {#   {{ form(pokemonUpdateForm) }}  #}
+        </div>
+    </section>
+</article>
+
+
+{% endblock %}

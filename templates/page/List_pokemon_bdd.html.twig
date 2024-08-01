@@ -10,6 +10,8 @@
                         <h2 class="blue"><a href="{{ path("pokemon_by_id_bdd", {idPokemon: pokemon.id}) }}"> {{ pokemon.title }} </a></h2>
                         <p>{{ pokemon.description }}</p>
                         <div class="image_pokemon"><a href="{{ path("pokemon_by_id_bdd", {idPokemon: pokemon.id}) }}"><img src="{{ pokemon.image }}" alt="{{ pokemon.title }}"></a></div>
+                        <h3><a href="{{ path("delete_pokemon", {id: pokemon.id}) }}">Supprimer</a></h3>
+                        <h3><a href="{{ path("update_pokemon", {id: pokemon.id}) }}">Modifier</a></h3>
                     </section>
             {% endfor %}
         </article>

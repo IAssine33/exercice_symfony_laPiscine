@@ -248,6 +248,28 @@ class pokemonesController extends AbstractController
            }
            return $this->render('page/pokemon_insert_formBuilder.html.twig', [ 'pokemonForm' => $pokemonForm->createView()]);
         }
+
+
+        #[route('/pokemon/update/{id}', name: 'update_pokemon')]
+        public function update_pokemon(int $id, PokemonRepository $pokemonRepository, EntityManagerInterface $entityManager, Request $request): Response
+        {
+
+            $pokemon = $pokemonRepository->find($id);
+            $pokemonUpdateForm = $this->createForm(PokemonType::class, $pokemon);
+
+            $pokemonUpdateForm->handleRequest($request);
+
+            if ($pokemonUpdateForm->isSubmitted() && $pokemonUpdateForm->isValid()) {
+                $entityManager->persist($pokemon);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('list-pokemon-bdd');
+
+            }
+            return $this->render('page/pokemon_update_form.html.twig', [ 'pokemonUpdateForm' => $pokemonUpdateForm->createView()]);
+        }
+
+
 }
 
 
